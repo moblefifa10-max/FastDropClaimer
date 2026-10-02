@@ -18,15 +18,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant Execute Permission to Gradlew
-        run: chmod +x gradlew
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FastClaimer-Debug-APK
           path: app/build/outputs/apk/debug/*.apk
-          
